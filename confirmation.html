@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmation Page</title>
+    <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+    <script>
+        // Initialize EmailJS
+        (function() {
+            emailjs.init('xzGSIqfTRl9At4cAN'); // Replace with your EmailJS public key
+        })();
+
+        // Function to send the follow-up email
+        function sendConfirmationEmail() {
+            const email = new URLSearchParams(window.location.search).get('email');
+
+            const templateParams = {
+                to_email: email,
+            };
+
+            emailjs.send('service_muhq6le', 'template_oahw08c', templateParams)
+                .then((response) => {
+                    console.log('Follow-up email sent successfully!', response);
+                })
+                .catch((error) => {
+                    console.error('Failed to send follow-up email:', error);
+                });
+        }
+
+        // Send the email when the page loads
+        window.onload = sendConfirmationEmail;
+    </script>
+</head>
+<body>
+    <h1>Thank you for confirming!</h1>
+    <p>We have sent you a confirmation email.</p>
+</body>
+</html>
